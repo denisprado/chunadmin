@@ -1,30 +1,30 @@
+import RichTextInput from "ra-input-rich-text";
 import React from "react";
 import {
   Create,
-  Edit,
-  List,
-  SimpleForm,
-  DisabledInput,
-  TextInput,
-  DateInput,
-  LongTextInput,
-  ReferenceManyField,
+  ArrayField,
   Datagrid,
-  TextField,
-  DateField,
+  DisabledInput,
+  Edit,
   EditButton,
-  EmailField,
-  ImageField
+  ImageField,
+  TabbedForm,
+  FormTab,
+  List,
+  RichTextField,
+  SimpleForm,
+  TextField,
+  TextInput
 } from "react-admin";
-import RichTextInput from "ra-input-rich-text";
 
 export const AlbumList = props => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="title" />
-      <EmailField source="content" />
+      <RichTextField source="content" />
       <ImageField source="thumbImage.url" />
+
       <EditButton />
     </Datagrid>
   </List>
@@ -40,22 +40,24 @@ export const AlbumCreate = props => (
       <TextInput source="title" />
       <RichTextInput source="content" />
     </SimpleForm>
-  </Create>
+  </Create >
 );
 
 export const AlbumEdit = props => (
   <Edit title={<AlbumTitle />} {...props}>
-    <SimpleForm>
-      <DisabledInput label="Id" source="id" />
-      <TextInput source="title" />
-      <RichTextInput source="content" />
-      <ReferenceManyField label="Files" reference="files" target="album_id">
-        <Datagrid>
-          <TextField source="content" />
-          <DateField source="created_at" />
-          <EditButton />
-        </Datagrid>
-      </ReferenceManyField>
-    </SimpleForm>
+    <TabbedForm>
+      <FormTab label="resumo">
+        <DisabledInput label="Id" source="id" />
+        <TextInput source="title" />
+        <RichTextInput source="content" />
+      </FormTab>
+      <FormTab label="fotos">
+        <ArrayField source="Files">
+          <Datagrid>
+            <ImageField source="url" />
+          </Datagrid>
+        </ArrayField>
+      </FormTab>
+    </TabbedForm>
   </Edit>
 );
