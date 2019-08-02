@@ -1,5 +1,12 @@
 import React from "react";
-import { List, Datagrid, TextField, EmailField } from "react-admin";
+import {
+  List,
+  Datagrid,
+  TextField,
+  EmailField,
+  ImageField,
+  EditButton
+} from "react-admin";
 
 export const PageList = props => (
   <List {...props}>
@@ -7,6 +14,8 @@ export const PageList = props => (
       <TextField source="id" />
       <TextField source="title" />
       <EmailField source="content" />
+      <ImageField source="image.url" />
+      <EditButton />
     </Datagrid>
   </List>
 );
