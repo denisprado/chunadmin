@@ -57,7 +57,7 @@ export const PageEdit = props => (
       <TextInput source="title" />
       <RichTextInput source="content" />
       <ReferenceInput label="Image" source="image.id" reference="files">
-        <SelectInput source="image.url" />
+        <SelectInput source="thumbImage.url" />
       </ReferenceInput>
     </SimpleForm>
   </Edit>

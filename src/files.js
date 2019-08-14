@@ -23,6 +23,7 @@ export const FileList = props => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
+      <TextField source="title" />
       <ReferenceField label="Album" source="AlbumId" reference="albums">
         <TextField source="title" />
       </ReferenceField>
@@ -38,6 +39,7 @@ export const FileCreate = props => (
       <ReferenceInput label="Album" source="AlbumId" reference="albums">
         <SelectInput optionText="title" />
       </ReferenceInput>
+      
       <ImageInput
         source="files"
         label="Related pictures"
