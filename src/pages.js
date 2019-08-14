@@ -8,7 +8,12 @@ import {
   EditButton,
   SimpleForm,
   Create,
-  TextInput, ImageInput, Edit, DisabledInput
+  TextInput,
+  ImageInput,
+  Edit,
+  DisabledInput,
+  SelectInput,
+  ReferenceInput
 } from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 
@@ -51,14 +56,9 @@ export const PageEdit = props => (
       <DisabledInput label="Id" source="id" />
       <TextInput source="title" />
       <RichTextInput source="content" />
-      <ImageInput
-        source="thumbImage"
-        label="Related pictures"
-        accept="image/*"
-        placeholder={<p>Drop your file here</p>}
-      >
-        <ImageField source="thumbImage" title="image" />
-      </ImageInput>
+      <ReferenceInput label="Image" source="image.id" reference="files">
+        <SelectInput source="image.url" />
+      </ReferenceInput>
     </SimpleForm>
   </Edit>
 );

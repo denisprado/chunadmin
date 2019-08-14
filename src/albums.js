@@ -14,7 +14,9 @@ import {
   RichTextField,
   SimpleForm,
   TextField,
-  TextInput
+  TextInput,
+  ReferenceInput,
+  SelectInput
 } from "react-admin";
 
 export const AlbumList = props => (
@@ -40,7 +42,7 @@ export const AlbumCreate = props => (
       <TextInput source="title" />
       <RichTextInput source="content" />
     </SimpleForm>
-  </Create >
+  </Create>
 );
 
 export const AlbumEdit = props => (
@@ -50,6 +52,13 @@ export const AlbumEdit = props => (
         <DisabledInput label="Id" source="id" />
         <TextInput source="title" />
         <RichTextInput source="content" />
+        <ReferenceInput
+          label="Image Thumbnail"
+          source="thumb"
+          reference="files"
+        >
+          <SelectInput source="thumbImage.url" />
+        </ReferenceInput>
       </FormTab>
       <FormTab label="fotos">
         <ArrayField source="Files">
