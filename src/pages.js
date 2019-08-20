@@ -1,6 +1,7 @@
 import React from "react";
 import {
   List,
+  required,
   Datagrid,
   TextField,
   RichTextField,
@@ -21,6 +22,8 @@ const PageTitle = ({ record }) => {
   return <span>Page {record ? `"${record.title}"` : ""}</span>;
 };
 
+const isRequired = [required()];
+
 export const PageList = props => (
   <List {...props}>
     <Datagrid rowClick="edit">
@@ -36,16 +39,11 @@ export const PageList = props => (
 export const PageCreate = props => (
   <Create {...props}>
     <SimpleForm>
-      <TextInput source="title" />
-      <RichTextInput source="content" />
-      <ImageInput
-        source="thumbImage.url"
-        label="Related pictures"
-        accept="image/*"
-        placeholder={<p>Drop your file here</p>}
-      >
-        <ImageField source="thumbImage.url" title="image" />
-      </ImageInput>
+      <TextInput source="title" validate={isRequired} />
+      <RichTextInput source="content" validate={isRequired} />
+      <ReferenceInput label="Image" source="image_id" reference="files">
+        <SelectInput source="thumbImage.url" />
+      </ReferenceInput>
     </SimpleForm>
   </Create>
 );
@@ -54,8 +52,8 @@ export const PageEdit = props => (
   <Edit title={<PageTitle />} {...props}>
     <SimpleForm>
       <DisabledInput label="Id" source="id" />
-      <TextInput source="title" />
-      <RichTextInput source="content" />
+      <TextInput source="title" validate={isRequired} />
+      <RichTextInput source="content" validate={isRequired} />
       <ReferenceInput label="Image" source="image_id" reference="files">
         <SelectInput source="thumbImage.url" />
       </ReferenceInput>
