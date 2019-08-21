@@ -18,7 +18,7 @@ const httpClient = (url, options = {}) => {
   options.headers.set('Authorization', `Bearer ${token}`);
   return fetchUtils.fetchJson(url, options);
 }
-const dataProvider = jsonServerProvider("http://localhost:3333", httpClient);
+const dataProvider = jsonServerProvider(process.env.REACT_APP_API_URL, httpClient);
 
 const App = () => (
   <Admin

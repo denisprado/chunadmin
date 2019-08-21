@@ -11,7 +11,7 @@ import {
 } from "react-admin";
 import { stringify } from "query-string";
 
-const API_URL = "http://localhost:3333";
+const API_URL = process.env.REACT_APP_API_URL;
 
 /**
  * @param {String} type One of the constants appearing at the top of this file, e.g. 'UPDATE'

@@ -21,7 +21,7 @@ export default (type, params) => {
 
   if (type === AUTH_LOGIN) {
     const { username, password } = params;
-    const request = new Request('http://localhost:3333/sessions', {
+    const request = new Request(`${process.env.REACT_APP_API_URL}/sessions`, {
       method: 'POST',
       body: JSON.stringify({ name: username, password }),
       headers: new Headers({ 'Content-Type': 'application/json' }),
