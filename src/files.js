@@ -1,19 +1,19 @@
 import React from "react";
 import {
-  List,
-  Datagrid,
-  TextField,
-  ImageField,
-  EditButton,
-  SimpleForm,
   Create,
-  TextInput,
-  ImageInput,
-  Edit,
+  Datagrid,
   DisabledInput,
-  ReferenceField
+  Edit,
+  EditButton,
+  ImageField,
+  ImageInput,
+  List,
+  ReferenceField,
+  ReferenceInput,
+  SelectInput,
+  SimpleForm,
+  TextField
 } from "react-admin";
-import { ReferenceInput, SelectInput } from "react-admin";
 
 const FileTitle = ({ record }) => {
   return <span>File {record ? `"${record.title}"` : ""}</span>;
@@ -45,6 +45,7 @@ export const FileCreate = props => (
         label="Related pictures"
         accept="image/*"
         placeholder={<p>Drop your file here</p>}
+        multiple
       >
         <ImageField source="src" title="title" />
       </ImageInput>
