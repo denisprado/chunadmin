@@ -1,37 +1,34 @@
-const convertFileToBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file.rawFile);
+const convertFileToBase64 = files => {
+  const reader = new FormData();
+  files.map(file => {
+    reader.append("files[]", file.preview);
+  });
 
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = reject;
-});
-
+  return reader;
+};
 
 /**
-* For posts update only, convert uploaded image in base 64 and attach it to
-* the `picture` sent property, with `src` and `title` attributes.
-*/
+ * For posts update only, convert uploaded image in base 64 and attach it to
+ * the `picture` sent property, with `src` and `title` attributes.
+ */
 const addUploadCapabilities = requestHandler => (type, resource, params) => {
-  if (type === 'CREATE' && resource === 'files') {
+  if (type === "CREATE" && resource === "files") {
     if (params.data.files && params.data.files.length) {
       // only freshly dropped files are instance of File
+      const files = params.data.files.filter(
+        file => file.rawFile instanceof File
+      );
 
-      const newFiles = params.data.files.filter(f => f.rawFile instanceof File);
+      const formData = convertFileToBase64(files);
 
-
-      return Promise.all(newFiles.map(convertFileToBase64))
-        .then(base64Files => base64Files.map((picture64, index) => ({
-          src: picture64,
-          title: `${newFiles[index].title}`,
-        })))
-        .then(transformedNewFiles => requestHandler(type, resource, {
-          ...params,
-          data: {
-            ...params.data,
-            files: new FormData(),
-          },
-        }));
-
+      //formData.append("AlbumId", params.AlbumId);
+      return requestHandler(type, resource, {
+        ...params,
+        data: {
+          ...params.data,
+          files: formData
+        }
+      });
     }
   }
 
