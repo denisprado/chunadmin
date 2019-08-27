@@ -10,7 +10,6 @@ import {
   SimpleForm,
   Create,
   TextInput,
-  ImageInput,
   Edit,
   DisabledInput,
   SelectInput,

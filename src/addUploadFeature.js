@@ -1,9 +1,6 @@
 const convertFileToBase64 = files => {
   const reader = new FormData();
-  files.map(file => {
-    reader.append("files[]", file.preview);
-  });
-
+  files.map(file => reader.append("files[]", file.preview));
   return reader;
 };
 
