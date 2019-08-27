@@ -12,20 +12,16 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
   if (type === "CREATE" && resource === "files") {
     if (params.data.files && params.data.files.length) {
       // only freshly dropped files are instance of File
-      const files = params.data.files.filter(
-        file => file.rawFile instanceof File
-      );
 
-      const formData = convertFileToBase64(files);
+      let form = new FormData()
+      //the params contain the image as a fileInstance
+      form.append('files', params.data.files[0].rawFile.preview);
 
-      //formData.append("AlbumId", params.AlbumId);
-      return requestHandler(type, resource, {
-        ...params,
-        data: {
-          ...params.data,
-          files: formData
-        }
-      });
+      const res = fetch('https://chun-back.herokuapp.com/send', {
+        method: 'POST',
+        body: form
+      }).then(res => { return requestHandler(type, resource, res) })
+      return res;
     }
   }
 
