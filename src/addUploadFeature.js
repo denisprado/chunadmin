@@ -17,7 +17,7 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
       //the params contain the image as a fileInstance
       form.append('files', params.data.files[0].rawFile.preview);
 
-      const res = fetch('https://chun-back.herokuapp.com/send', {
+      const res = fetch('http://localhost:3333/files', {
         method: 'POST',
         body: form
       }).then(res => { return requestHandler(type, resource, res) })
