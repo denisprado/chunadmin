@@ -1,8 +1,32 @@
-const convertFileToBase64 = files => {
-  const reader = new FormData();
-  files.map(file => reader.append("files[]", file.preview));
-  return reader;
-};
+function sendData(data, boundary) {
+  const XHR = new XMLHttpRequest();
+  const FD = new FormData();
+
+  // Push our data into our FormData object
+  // for (let name in data) {
+  FD.append("files", new Blob([data], { type: "image" }), "teste");
+  // }
+
+  // Define what happens on successful data submission
+  XHR.addEventListener("load", function(event) {
+    alert("Yeah! Data sent and response loaded.");
+  });
+
+  // Define what happens in case of error
+  XHR.addEventListener("error", function(event) {
+    alert("Oops! Something went wrong.");
+  });
+
+  // Set up our request
+  XHR.open("POST", "http://localhost:3333/files");
+  XHR.setRequestHeader(
+    "Content-Type",
+    "multipart/form-data; boundary=" + boundary
+  );
+  XHR.setRequestHeader("X-Api-Authorization", window.access_token);
+  // Send our FormData object; HTTP headers are set automatically
+  XHR.send(FD);
+}
 
 /**
  * For posts update only, convert uploaded image in base 64 and attach it to
@@ -11,17 +35,10 @@ const convertFileToBase64 = files => {
 const addUploadCapabilities = requestHandler => (type, resource, params) => {
   if (type === "CREATE" && resource === "files") {
     if (params.data.files && params.data.files.length) {
-      // only freshly dropped files are instance of File
+      const blob = params.data.files[0].rawFile.preview;
+      const boundary = String(Math.random()).slice(2);
 
-      let form = new FormData()
-      //the params contain the image as a fileInstance
-      form.append('files', params.data.files[0].rawFile.preview);
-
-      const res = fetch('http://localhost:3333/files', {
-        method: 'POST',
-        body: form
-      }).then(res => { return requestHandler(type, resource, res) })
-      return res;
+      sendData(blob, boundary);
     }
   }
 
