@@ -8,7 +8,7 @@ import { FileCreate, FileEdit, FileList } from "./files";
 import MyLogoutButton from './MyLogoutButton';
 import { PageCreate, PageEdit, PageList } from "./pages";
 import { UserList } from "./user";
-import addUploadFeature from './addUploadFeature';
+// import addUploadFeature from './addUploadFeature';
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -19,12 +19,13 @@ const httpClient = (url, options = {}) => {
   return fetchUtils.fetchJson(url, options);
 }
 const dataProvider = jsonServerProvider(process.env.REACT_APP_API_URL, httpClient);
-const uploadCapableDataProvider = addUploadFeature(dataProvider);
+//const uploadCapableDataProvider = addUploadFeature(dataProvider);
 
 
 const App = () => (
   <Admin
-    dataProvider={uploadCapableDataProvider}
+    dataProvider={dataProvider}
+    //dataProvider={uploadCapableDataProvider}
     //loginPage={LoginWithTheme}
     logoutButton={MyLogoutButton}
     authProvider={authProvider}>
