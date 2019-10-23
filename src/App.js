@@ -12,7 +12,7 @@ import addUploadFeature from "./addUploadFeature";
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
-    options.headers = new Headers({});
+    options.headers = new Headers({ Accept: "multipart/form-data" });
   }
   const token = localStorage.getItem("token");
   options.headers.set("Authorization", `Bearer ${token}`);
@@ -22,6 +22,7 @@ const dataProvider = jsonServerProvider(
   process.env.REACT_APP_API_URL,
   httpClient
 );
+
 const uploadCapableDataProvider = addUploadFeature(dataProvider);
 
 const App = () => (
