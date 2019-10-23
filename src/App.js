@@ -12,11 +12,11 @@ import addUploadFeature from "./addUploadFeature";
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
-    options.headers = new Headers({ Accept: "multipart/form-data" });
+    options.headers = new Headers({ Accept: "application/json" });
   }
   const token = localStorage.getItem("token");
   options.headers.set("Authorization", `Bearer ${token}`);
-  options.headers.set("content-type", "multipart/form-data");
+  options.headers.set("content-type", "application/json");
   return fetchUtils.fetchJson(url, options);
 };
 const dataProvider = jsonServerProvider(
