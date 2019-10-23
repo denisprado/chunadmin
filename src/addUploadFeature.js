@@ -22,8 +22,15 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
       formData.append("files", file);
       formData.append("AlbumId", data.AlbumId);
 
-      params.data = formData.entries();
+      //params.data = formData;
       console.log(params.data);
+
+      var request = new XMLHttpRequest();
+      request.open(
+        "POST",
+        "http://ec2-18-218-213-112.us-east-2.compute.amazonaws.com:3333"
+      );
+      request.send(formData);
     }
   }
 
