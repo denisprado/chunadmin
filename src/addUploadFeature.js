@@ -4,15 +4,15 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
     console.log(params.data);
     if (params.data.files) {
       const files = params.data.files.map(file => file.rawFile);
-      const allFiles = files.filter(
+      /*const allFiles = files.filter(
         file =>
           file.type === "image/png" ||
           file.type === "image/jpeg" ||
           file.type === "image/jpg"
-      );
+      );*/
 
-      const file = allFiles[0];
-
+      const file = files[0];
+      console.log(file);
       // console.log(bookFile.preview);
 
       var formData = new FormData();
