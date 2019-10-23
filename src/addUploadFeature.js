@@ -1,7 +1,7 @@
 const addUploadCapabilities = requestHandler => (type, resource, params) => {
   if (type === "CREATE" && resource === "files") {
     // console.log(params.data.files);
-    console.log(params.data);
+
     if (params.data.files) {
       const files = params.data.files.map(file => file.rawFile);
       /*const allFiles = files.filter(
@@ -12,7 +12,6 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
       );*/
 
       const file = files[0];
-      console.log(params);
       // console.log(bookFile.preview);
 
       var formData = new FormData();
@@ -21,9 +20,10 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
 
       // files
       formData.append("files", file);
-      formData.append("AlbumId", params.AlbumId);
+      formData.append("AlbumId", data.AlbumId);
 
       params.data = formData;
+      console.log(params.data);
     }
   }
 
