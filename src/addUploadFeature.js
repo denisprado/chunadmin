@@ -3,7 +3,7 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
     // console.log(params.data.files);
 
     if (params.data.files) {
-      const files = params.data.files.map(file => file.rawFile);
+      const files = params.data.file.map(file => file.rawFile);
       /*const allFiles = files.filter(
         file =>
           file.type === "image/png" ||
