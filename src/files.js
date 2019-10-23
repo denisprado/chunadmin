@@ -45,6 +45,7 @@ export const FileCreate = props => (
         label="Related pictures"
         accept="image/*"
         placeholder={<p>Drop your file here</p>}
+        multiple
       >
         <ImageField source="src" title="title" />
       </ImageInput>
