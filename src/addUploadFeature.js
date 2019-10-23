@@ -28,7 +28,7 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
       var request = new XMLHttpRequest();
       request.open(
         "POST",
-        "http://ec2-18-218-213-112.us-east-2.compute.amazonaws.com:3333"
+        "http://ec2-18-218-213-112.us-east-2.compute.amazonaws.com:3333/files"
       );
       request.send(formData);
     }
