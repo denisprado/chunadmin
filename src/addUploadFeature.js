@@ -22,7 +22,7 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
       formData.append("files", file);
       formData.append("AlbumId", data.AlbumId);
 
-      params.data = formData;
+      params.data = formData.entries();
       console.log(params.data);
     }
   }
