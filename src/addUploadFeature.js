@@ -12,7 +12,7 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
       );*/
 
       const file = files[0];
-      console.log(file);
+      console.log(params);
       // console.log(bookFile.preview);
 
       var formData = new FormData();
@@ -20,10 +20,9 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
       // details
 
       // files
-      formData.append("file[]", file);
+      formData.append("file", file);
 
       params.data = formData;
-      console.log(params.data);
     }
   }
 
