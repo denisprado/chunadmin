@@ -20,7 +20,7 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
       // details
 
       // files
-      formData.append("files", file);
+      formData.append("file", file);
 
       params.data = formData;
       console.log(params.data);
