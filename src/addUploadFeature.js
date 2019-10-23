@@ -31,7 +31,7 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
         "http://ec2-18-218-213-112.us-east-2.compute.amazonaws.com:3333/files"
       );
       request.send(formData);
-      params = null;
+      //params = null;
     }
   }
 
