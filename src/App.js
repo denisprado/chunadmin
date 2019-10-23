@@ -16,6 +16,7 @@ const httpClient = (url, options = {}) => {
   }
   const token = localStorage.getItem("token");
   options.headers.set("Authorization", `Bearer ${token}`);
+  options.headers.set("content-type", "multipart/form-data");
   return fetchUtils.fetchJson(url, options);
 };
 const dataProvider = jsonServerProvider(
