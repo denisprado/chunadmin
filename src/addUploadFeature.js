@@ -13,6 +13,9 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
       files.forEach(file => {
         formData.append("files[]", file);
       });
+
+      console.log(formData.getAll("files"));
+
       formData.append("AlbumId", data.AlbumId);
 
       var request = new XMLHttpRequest();
