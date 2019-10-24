@@ -11,7 +11,7 @@ const addUploadCapabilities = requestHandler => (type, resource, params) => {
 
       // files
       files.forEach(file => {
-        formData.append("files[]", file);
+        formData.append("files", file);
       });
 
       console.log(formData.getAll("files"));
